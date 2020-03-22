@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "vetur.format.defaultFormatter.html": "none",
+  "vetur.format.defaultFormatter.css": "prettier",
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.validation.template": false,
+  "eslint.validate": ["javascript", "vue", "html"],
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 120,
+  "prettier.disableLanguages": ["vue"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

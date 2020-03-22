@@ -1,0 +1,9 @@
+{
+   "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "EditorConfig.EditorConfig",
+      "octref.vetur",
+      "mikestead.dotenv",
+      "hollowtree.vue-snippets"
+   ]
+}

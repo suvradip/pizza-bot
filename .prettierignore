@@ -1,0 +1,4 @@
+vendor/**/*
+.nuxt/**/*
+dist/**/*
+static/**/*
