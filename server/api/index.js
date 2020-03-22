@@ -1,15 +1,11 @@
 const router = require('express').Router();
+const consola = require('consola');
 const uuid = require('uuid');
-const dialogFlow = require('../service/dataflow');
+const dialogFlow = require('../service/dialogflow');
 const { Orders } = require('../service/firestore');
 const { extractValue } = require('../util');
-// router.get('/sessionId', (req, res) => {
-//    const sessionId = uuid.v4();
-//    res.json({
-//       token: sessionId,
-//    });
-// });
 
+/* communication with message */
 router.post('/bot', async (req, res) => {
    const { body } = req;
    const { message, sessionId } = body;
@@ -19,24 +15,49 @@ router.post('/bot', async (req, res) => {
       id = uuid.v4();
    }
 
-   console.log(id);
-
    const respond = await dialogFlow(message, id);
-
-   if (sessionId && typeof sessionId !== 'undefined') {
-      const data = extractValue(respond.output, respond.intent);
-      if (data) {
-         const [[key, value]] = Object.entries(data);
-         const a = Orders.insertOrUpdate(sessionId, { [key]: value });
-         console.log('insert', a);
+   const data = extractValue(respond.output, respond.intent);
+   try {
+      if (sessionId && typeof sessionId !== 'undefined' && respond.intent !== 'get_order_status') {
+         if (data) {
+            const [[key, value]] = Object.entries(data);
+            Orders.insertOrUpdate(sessionId, { [key]: value });
+         }
       }
+   } catch (error) {
+      consola.error('Bad happened while updating the data in firebase');
+      console.error(error);
    }
 
    res.json({
-      status: 'OK',
-      message: respond,
+      message: {
+         ...respond,
+         output: data,
+      },
       sessionId: id,
    });
+});
+
+/* will return all the orders */
+router.get('/orders', async (req, res) => {
+   const data = await Orders.findAll();
+   res.json({
+      data,
+   });
+});
+
+router.get('/orders/:orderId', async (req, res) => {
+   const { params } = req;
+   const { orderId } = params;
+   const DEFAULT_ERROR_MESSAGE = 'No records found. please check the given id once again.';
+   if (typeof orderId === 'undefined') return res.json({ message: DEFAULT_ERROR_MESSAGE });
+
+   const data = await Orders.findByField({ orderId });
+   if (data) {
+      return res.json({ message: data });
+   }
+
+   return res.json({ message: DEFAULT_ERROR_MESSAGE });
 });
 
 module.exports = router;

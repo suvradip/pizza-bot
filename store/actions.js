@@ -1,6 +1,11 @@
 export default {
-   async DATA_PROCESS({ commit, state }, message = '') {
-      const { data } = await this.$axios.post('/bot', { message, sessionId: state.bot && state.bot.sessionId });
-      commit('SET_BOT_DATA', data);
+   async FETCH_ORDERS({ commit }) {
+      const { data } = await this.$axios.get('/orders');
+      commit('SET_ORDERS', data);
    },
+
+   //  async FETCH_ORDER_STATUS({ commit }, orderId) {
+   //     const { data } = await this.$axios.get(`/orders/${orderId}`);
+   //     commit('SET_STATUS', data);
+   //  },
 };

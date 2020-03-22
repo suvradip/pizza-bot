@@ -1,13 +1,7 @@
 const path = require('path');
 const dialogflow = require('dialogflow');
-// const uuid = require('uuid');
 
-/**
- * Send a query to the dialogflow agent, and return the query result.
- * @param {string} projectId The project to be used
- */
-const KEY_FILE = path.resolve(__dirname, '..', '..', 'keyFile', 'key.json');
-// const sessionId = uuid.v4();
+const KEY_FILE = path.resolve(__dirname, '..', '..', 'keyFile', 'dialogflow.json');
 const PROJECT_ID = 'pizza-ignsuf';
 
 async function runSample(message, sessionId) {
@@ -35,10 +29,6 @@ async function runSample(message, sessionId) {
    console.log('Detected intent');
    const result = responses[0].queryResult;
 
-   //  responses.forEach(item => {
-   //   const result = item.queryResult;
-   //  });
-
    console.log(`  Query: ${result.queryText}`);
    console.log(`  Response: ${result.fulfillmentText}`);
    if (result.intent) {
@@ -47,15 +37,16 @@ async function runSample(message, sessionId) {
       console.log(`  No intent matched.`);
    }
 
-   let [output] = result.outputContexts;
-   if (output && typeof output.parameters !== 'undefined' && output.parameters !== null) {
-      console.log('Output', JSON.stringify(output.parameters.fields, null, 4));
-      output = output.parameters.fields;
-   } else {
-      output = '';
-   }
+   const output = Object.keys(result.parameters.fields).length > 0 ? result.parameters.fields : '';
+   console.log('Output', JSON.stringify(output, null, 4));
+   //  if (output && typeof output !== 'undefined' && output.parameters !== null) {
+   //     console.log('Output', JSON.stringify(output.parameters.fields, null, 4));
+   //     output = output.parameters.fields;
+   //  } else {
+   //     output = '';
+   //  }
 
-   //  console.log(JSON.stringify(result, null, 4));
+   console.log(JSON.stringify(result, null, 4));
    console.log('------------------------');
    return {
       fulfillmentText: result.fulfillmentText,
