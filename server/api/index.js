@@ -60,4 +60,22 @@ router.get('/orders/:orderId', async (req, res) => {
    return res.json({ message: DEFAULT_ERROR_MESSAGE });
 });
 
+router.get('/tracking/:id', async (req, res) => {
+   const { params } = req;
+   const { id } = params;
+   const DEFAULT_ERROR_MESSAGE = 'No records found. please check the given id once again.';
+   if (typeof id === 'undefined') return res.json({ message: DEFAULT_ERROR_MESSAGE });
+
+   const data = await Orders.findById(id);
+   if (data) {
+      return res.json({
+         message: {
+            orderId: data.orderId,
+         },
+      });
+   }
+
+   return res.json({ message: DEFAULT_ERROR_MESSAGE });
+});
+
 module.exports = router;

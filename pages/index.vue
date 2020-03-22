@@ -90,6 +90,8 @@ export default {
             this.showPizzaMenu();
          } else if (intentName === 'get_order_status') {
             this.showOrderStatus(output);
+         } else if (intentName === '6_pizza_user_info_address') {
+            this.showOrderId();
          }
       },
 
@@ -128,6 +130,15 @@ export default {
 
             /* update scroll position */
             this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight - this.$refs.messages.clientHeight;
+         } catch (error) {
+            console.error(error.message);
+         }
+      },
+
+      async showOrderId() {
+         try {
+            const { data } = await this.$axios.get(`/tracking/${this.sessionId}`);
+            this.showUserMessage({ message: `Your order id is ${data.message.orderId}`, from: 'bot' });
          } catch (error) {
             console.error(error.message);
          }
