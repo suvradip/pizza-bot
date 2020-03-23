@@ -1,7 +1,6 @@
 {
    "name": "pizza-bot",
-   "version": "1.0.0",
-   "description": "My majestic Nuxt.js project",
+   "version": "0.0.1",
    "author": "Suvradip Saha",
    "private": true,
    "scripts": {
