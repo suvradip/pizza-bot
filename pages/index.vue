@@ -1,23 +1,29 @@
 <template>
    <div class="container mt-5">
-      <div class="title-wrpper">
-         <h5>Johny</h5>
-         <p class="led">from Pizza store</p>
-      </div>
-
-      <div class="card chat-box">
-         <div class="card-body">
-            <div ref="messages" class="messages">
-               <Message data="Hello!" from="bot" />
-               <!-- <PizzaMenu :action="OnPizzaSelect" /> -->
-               <!-- <Tracking /> -->
-            </div>
-            <form class="text-box form-inline" @submit.prevent="submitAction">
-               <div class="form-group">
-                  <input v-model.trim="message" type="text" class="inputBox form-control" />
+      <div class="row">
+         <div class="col-12">
+            <div class="wrapper">
+               <div class="title-wrpper">
+                  <h5>Johny</h5>
+                  <p class="led">from Pizza store</p>
                </div>
-               <button class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-            </form>
+
+               <div class="card chat-box">
+                  <div class="card-body">
+                     <div ref="messages" class="messages">
+                        <Message data="Hello!" from="bot" />
+                        <!-- <PizzaMenu :action="OnPizzaSelect" /> -->
+                        <!-- <Tracking /> -->
+                     </div>
+                     <form class="text-box form-inline" @submit.prevent="submitAction">
+                        <div class="form-group">
+                           <input v-model.trim="message" type="text" class="inputBox form-control" />
+                        </div>
+                        <button class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                     </form>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
    </div>
@@ -35,7 +41,7 @@ export default {
 
    components: {
       Message,
-      // Tracking,
+      // PizzaMenu,
    },
 
    data() {

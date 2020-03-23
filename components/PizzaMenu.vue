@@ -1,15 +1,17 @@
 <template>
    <div class="pizza-menu-wrapper">
-      <div v-for="(item, index) in menu" :key="index" class="card">
-         <div class="card-body">
-            <img class="card-img" :src="item.image" alt="" />
+      <div class="wrapper">
+         <div v-for="(item, index) in menu" :key="index" class="card">
+            <div class="card-body">
+               <img class="card-img" :src="item.image" alt="" />
 
-            <h6 class="card-title" v-text="item.name" />
-            <p class="card-text" v-text="item.description" />
-         </div>
-         <div class="card-footer">
-            <div class="text-center">
-               <button class="btn btn-sm btn-info text-center" @click="onBtnAction(item.name)">SELECT</button>
+               <h6 class="card-title" v-text="item.name" />
+               <p class="card-text" v-text="item.description" />
+            </div>
+            <div class="card-footer">
+               <div class="text-center">
+                  <button class="btn btn-sm btn-info text-center" @click="onBtnAction(item.name)">SELECT</button>
+               </div>
             </div>
          </div>
       </div>
@@ -64,24 +66,38 @@ export default {
 
 <style lang="scss" scoped>
 .pizza-menu-wrapper {
-   .card {
-      display: inline-block;
-      margin: 0 5px;
-      width: 10rem;
-      .card-body {
-         padding: 5px;
+   overflow: auto;
+
+   white-space: nowrap;
+   .wrapper {
+      display: flex;
+      white-space: nowrap;
+      overflow: auto;
+      width: 100vh;
+
+      .card {
+         display: inline-flex;
+         width: 10rem;
+         margin: 0 5px;
+         .card-body {
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+         }
          .card-img {
             width: 100%;
-            height: 100px;
+            height: 140px;
+            box-shadow: 1px 4px 5px #ccc;
+            border: 5px solid #fff;
          }
-
          .card-title {
             margin-top: 8px;
             margin-bottom: 10px;
+            white-space: pre-wrap;
          }
-
          .card-text {
             font-size: 12px;
+            white-space: pre-wrap;
          }
       }
    }
