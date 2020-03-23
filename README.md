@@ -33,11 +33,11 @@ You need to do couple things before start this application. Creation of private 
 
 **DialogFlow**
 
-1. you need to create an account in dialogflow and export the agent as zip. Zip file is present under projectAssets folder.
+1. you need to create an account in dialogflow and export the agent as [zip](https://github.com/suvradip/pizza-bot/tree/master/projectAssets/dialogflow). Zip file is present under projectAssets folder.
 
-2. Use this [guide](https://github.com/googleapis/nodejs-dialogflow#before-you-begin) to generate private key and other setup
+2) Use this [guide](https://github.com/googleapis/nodejs-dialogflow#before-you-begin) to generate private key and other setup
 
-3. place the private key file (rename it to dialogFlow.json) under keyFile folder.
+3) place the private key file (rename it to dialogFlow.json) under keyFile folder.
 
 **FireBase**
 
@@ -46,5 +46,8 @@ You need to do couple things before start this application. Creation of private 
 3. Generate the key file and save it under keyFile folder (rename the file as firebase.json) in this project.
 
 After doing all the steps your folder structure look like this
+<img src="https://i.ibb.co/DR9nKCT/ss-1.png" alt="ss-1" border="0" />
 
 Thats it. We are good to go to run this app now.
+
+Screen shoots of this project can be found here https://github.com/suvradip/pizza-bot/tree/master/projectAssets/chat
