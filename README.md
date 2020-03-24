@@ -2,6 +2,8 @@
 
 > His name is Johny, from Pizza store who helps you with your pizza order and track your existing any order.
 
+[**Live Demo**](https://pizza-order-with-bot.herokuapp.com/)
+
 ## Build Setup is simple and straight forward
 
 ```bash
